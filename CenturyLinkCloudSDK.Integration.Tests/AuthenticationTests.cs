@@ -12,18 +12,18 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task LoginReturnTokenWhenValid()
         {
-            var authenticationContext = new Authentication();
+            var authenticationContext = new AuthenticationService();
             var result = await authenticationContext.Login("mario.mamalis", "MarioTest!");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!String.IsNullOrEmpty(result.BearerToken));
-            Assert.IsTrue(Persistence.IsUserAuthenticated);
+            Assert.IsTrue(Authentication.IsUserAuthenticated);
         }
 
         [TestMethod]
         public async Task LoginUserNotAuthenticatedWhenInvalid()
         {
-            var authenticationContext = new Authentication();
+            var authenticationContext = new AuthenticationService();
             var result = await authenticationContext.Login("mario.mamaliss", "MarioTest!");
 
             Assert.IsNull(result);

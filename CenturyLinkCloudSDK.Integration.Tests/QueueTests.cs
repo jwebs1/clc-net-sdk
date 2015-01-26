@@ -14,7 +14,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestInitialize]
         public void Login()
         {
-            var authentication = new Authentication();
+            var authentication = new AuthenticationService();
             var result = authentication.Login("mario.mamalis", "MarioTest!").Result;
         }
 
@@ -23,8 +23,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var serverContext = new Servers();
-            var serverOperationResponse = await serverContext.ResetServer(Persistence.UserInfo.AccountAlias, serverIds);
+            var serverContext = new ServerService();
+            var serverOperationResponse = await serverContext.ResetServer(Authentication.UserInfo.AccountAlias, serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -39,8 +39,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
                         if (status != null)
                         {
                             var statusId = status.Id;
-                            var queueContext = new Queues();
-                            var queue = await queueContext.GetStatus(Persistence.UserInfo.AccountAlias, statusId);
+                            var queueContext = new QueueService();
+                            var queue = await queueContext.GetStatus(Authentication.UserInfo.AccountAlias, statusId);
 
                             Assert.IsTrue(!String.IsNullOrEmpty(queue.Status));
                         }
