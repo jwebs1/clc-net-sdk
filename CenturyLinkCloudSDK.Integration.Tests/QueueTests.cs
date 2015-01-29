@@ -1,21 +1,24 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CenturyLinkCloudSDK.ServiceAPI.V2;
+using CenturyLinkCloudSDK.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CenturyLinkCloudSDK.ServiceAPI.Runtime;
+using CenturyLinkCloudSDK.Services.Runtime;
 using System.Linq;
+using CenturyLinkCloudSDK.ServiceModels.Common;
 
 namespace CenturyLinkCloudSDK.Unit.Tests
 {
     [TestClass]
     public class QueueTests
     {
+        private AuthenticationInfo userAuthentication;
+
         [TestInitialize]
         public void Login()
         {
-            var authentication = new AuthenticationService();
-            var result = authentication.Login("mario.mamalis", "MarioTest!").Result;
+            var client = new Client("mario.mamalis", "MarioTest!");
+            userAuthentication = client.AuthenticationInfo;
         }
 
         [TestMethod]
@@ -23,8 +26,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var serverContext = new ServerService();
-            var serverOperationResponse = await serverContext.ResetServer(Authentication.UserInfo.AccountAlias, serverIds);
+            var client = new Client(userAuthentication);
+            var serverOperationResponse = await client.ServerService.ResetServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -39,8 +42,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
                         if (status != null)
                         {
                             var statusId = status.Id;
-                            var queueContext = new QueueService();
-                            var queue = await queueContext.GetStatus(Authentication.UserInfo.AccountAlias, statusId);
+                            var queue = await client.QueueService.GetStatus(statusId);
 
                             Assert.IsTrue(!String.IsNullOrEmpty(queue.Status));
                         }

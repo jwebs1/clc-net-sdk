@@ -1,27 +1,30 @@
-﻿using CenturyLinkCloudSDK.ServiceAPI.Runtime;
-using CenturyLinkCloudSDK.ServiceAPI.V2;
+﻿using CenturyLinkCloudSDK.Services.Runtime;
+using CenturyLinkCloudSDK.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CenturyLinkCloudSDK.ServiceModels.Common;
 
 namespace CenturyLinkCloudSDK.Unit.Tests
 {
     [TestClass]
     public class ServersTests
     {
+        private AuthenticationInfo userAuthentication;
+
         [TestInitialize]
         public void Login()
         {
-            var authentication = new AuthenticationService();
-            var result = authentication.Login("mario.mamalis", "MarioTest!").Result;
+            var client = new Client("mario.mamalis", "MarioTest!");
+            userAuthentication = client.AuthenticationInfo;
         }
 
         [TestMethod]
         public async Task GetServerReturnValidData()
         {
-            var serverContext = new ServerService();
-            var result = await serverContext.GetServer(Authentication.UserInfo.AccountAlias, "CA1P2O2DF2TST01");
+            var client = new Client(userAuthentication);
+            var result = await client.ServerService.GetServer("CA1P2O2DF2TST01");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!String.IsNullOrEmpty(result.Id));
@@ -30,8 +33,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetServerByHyperlinkReturnValidData()
         {
-            var serverContext = new ServerService();
-            var result = await serverContext.GetServer("/v2/servers/p2o2/ca1p2o2df2tst01");
+            var client = new Client(userAuthentication);
+            var result = await client.ServerService.GetServerByHypermediaLink("/v2/servers/p2o2/ca1p2o2df2tst01");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!String.IsNullOrEmpty(result.Id));
@@ -43,8 +46,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var serverContext = new ServerService();
-            var serverOperationResponse = await serverContext.PauseServer(Authentication.UserInfo.AccountAlias, serverIds);
+            var client = new Client(userAuthentication);
+            var serverOperationResponse = await client.ServerService.PauseServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -63,8 +66,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var serverContext = new ServerService();
-            var serverOperationResponse = await serverContext.PowerOnServer(Authentication.UserInfo.AccountAlias, serverIds);
+            var client = new Client(userAuthentication);
+            var serverOperationResponse = await client.ServerService.PowerOnServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -83,8 +86,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var serverContext = new ServerService();
-            var serverOperationResponse = await serverContext.PowerOffServer(Authentication.UserInfo.AccountAlias, serverIds);
+            var client = new Client(userAuthentication);
+            var serverOperationResponse = await client.ServerService.PowerOffServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -104,8 +107,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var serverContext = new ServerService();
-            var serverOperationResponse = await serverContext.RebootServer(Authentication.UserInfo.AccountAlias, serverIds);
+            var client = new Client(userAuthentication);
+            var serverOperationResponse = await client.ServerService.RebootServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -124,8 +127,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var serverContext = new ServerService();
-            var serverOperationResponse = await serverContext.ShutDownServer(Authentication.UserInfo.AccountAlias, serverIds);
+            var client = new Client(userAuthentication);
+            var serverOperationResponse = await client.ServerService.ShutDownServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -144,8 +147,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var serverContext = new ServerService();
-            var serverOperationResponse = await serverContext.ResetServer(Authentication.UserInfo.AccountAlias, serverIds);
+            var client = new Client(userAuthentication);
+            var serverOperationResponse = await client.ServerService.ResetServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -153,9 +156,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
                 {
                     if (string.IsNullOrEmpty(server.ErrorMessage))
                     {
-
-
-
                         Assert.IsTrue(server.IsQueued);
                     }
                 }

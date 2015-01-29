@@ -1,25 +1,28 @@
-﻿using CenturyLinkCloudSDK.ServiceAPI.Runtime;
-using CenturyLinkCloudSDK.ServiceAPI.V2;
+﻿using CenturyLinkCloudSDK.Services.Runtime;
+using CenturyLinkCloudSDK.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using CenturyLinkCloudSDK.ServiceModels.Common;
 
 namespace CenturyLinkCloudSDK.Unit.Tests
 {
     [TestClass]
     public class GroupsTests
     {
+        private AuthenticationInfo userAuthentication;
+
         [TestInitialize]
         public void Login()
         {
-            var authentication = new AuthenticationService();
-            var result = authentication.Login("mario.mamalis", "MarioTest!").Result;
+            var client = new Client("mario.mamalis", "MarioTest!");
+            userAuthentication = client.AuthenticationInfo;
         }
 
         [TestMethod]
         public async Task GetGroupReturnValidData()
         {
-            var groupContext = new GroupService();
-            var result = await groupContext.GetGroup(Authentication.UserInfo.AccountAlias, "ca1-42311");
+            var client = new Client(userAuthentication);
+            var result = await client.GroupService.GetGroup("ca1-42311");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
@@ -29,8 +32,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetGroupByHyperlinkReturnValidData()
         {
-            var groupContext = new GroupService();
-            var result = await groupContext.GetGroup("/v2/groups/p2o2/ca1-42311");
+            var client = new Client(userAuthentication);
+            var result = await client.GroupService.GetGroupByHyperLink("/v2/groups/p2o2/ca1-42311");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));

@@ -1,5 +1,6 @@
-﻿using CenturyLinkCloudSDK.ServiceAPI.Runtime;
-using CenturyLinkCloudSDK.ServiceAPI.V2;
+﻿using CenturyLinkCloudSDK.ServiceModels.Common;
+using CenturyLinkCloudSDK.Services;
+using CenturyLinkCloudSDK.Services.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Threading.Tasks;
@@ -10,23 +11,21 @@ namespace CenturyLinkCloudSDK.Unit.Tests
     public class AuthenticationTests
     {
         [TestMethod]
-        public async Task LoginReturnTokenWhenValid()
+        public void LoginReturnTokenWhenValid()
         {
-            var authenticationContext = new AuthenticationService();
-            var result = await authenticationContext.Login("mario.mamalis", "MarioTest!");
+            var client = new Client("mario.mamalis", "MarioTest!");
 
-            Assert.IsNotNull(result);
-            Assert.IsTrue(!String.IsNullOrEmpty(result.BearerToken));
-            Assert.IsTrue(Authentication.IsUserAuthenticated);
+            Assert.IsNotNull(client.UserInfo);
+            Assert.IsTrue(!String.IsNullOrEmpty(client.UserInfo.BearerToken));
+            Assert.IsTrue(!String.IsNullOrEmpty(client.UserInfo.AccountAlias));
         }
 
         [TestMethod]
-        public async Task LoginUserNotAuthenticatedWhenInvalid()
+        public void LoginUserNotAuthenticatedWhenInvalid()
         {
-            var authenticationContext = new AuthenticationService();
-            var result = await authenticationContext.Login("mario.mamaliss", "MarioTest!");
+            var client = new Client("mario.mamalisss", "MarioTest!");
 
-            Assert.IsNull(result);
+            Assert.IsNull(client.UserInfo.BearerToken);
         }
     }
 

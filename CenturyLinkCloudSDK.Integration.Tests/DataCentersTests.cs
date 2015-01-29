@@ -1,26 +1,29 @@
-﻿using CenturyLinkCloudSDK.ServiceAPI.Runtime;
-using CenturyLinkCloudSDK.ServiceAPI.V2;
+﻿using CenturyLinkCloudSDK.Services.Runtime;
+using CenturyLinkCloudSDK.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Threading.Tasks;
+using CenturyLinkCloudSDK.ServiceModels.Common;
 
 namespace CenturyLinkCloudSDK.Unit.Tests
 {
     [TestClass]
     public class DataCentersTests
     {
+        private AuthenticationInfo userAuthentication;
+
         [TestInitialize]
         public void Login()
         {
-            var authentication = new AuthenticationService();
-            var result = authentication.Login("mario.mamalis", "MarioTest!").Result;
+            var client = new Client("mario.mamalis", "MarioTest!");
+            userAuthentication = client.AuthenticationInfo;
         }
 
         [TestMethod]
         public async Task GetDataCentersReturnValidData()
         {
-            var dataCenterContext = new DataCenterService();
-            var result = await dataCenterContext.GetDataCenters(Authentication.UserInfo.AccountAlias);
+            var client = new Client(userAuthentication);
+            var result = await client.DataCenterService.GetDataCenters();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.ToList().Count > 0);
@@ -29,8 +32,9 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetDataCenterByHyperlinkReturnValidData()
         {
-            var dataCenterContext = new DataCenterService();
-            var result = await dataCenterContext.GetDataCenter("/v2/datacenters/p2o2/ca1");
+
+            var client = new Client(userAuthentication);
+            var result = await client.DataCenterService.GetDataCenterByHyperMediaLink("/v2/datacenters/p2o2/ca1");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Id == "ca1");
@@ -39,8 +43,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetDataCenterReturnValidData()
         {
-            var dataCenterContext = new DataCenterService();
-            var result = await dataCenterContext.GetDataCenter(Authentication.UserInfo.AccountAlias, "ca1");
+            var client = new Client(userAuthentication);
+            var result = await client.DataCenterService.GetDataCenter("ca1");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Id == "ca1");
@@ -49,8 +53,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetDataCenterGroupReturnValidData()
         {
-            var dataCenterContext = new DataCenterService();
-            var result = await dataCenterContext.GetDataCenterGroup(Authentication.UserInfo.AccountAlias, "ca1");
+            var client = new Client(userAuthentication);
+            var result = await client.DataCenterService.GetDataCenterGroup("ca1");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
@@ -60,8 +64,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetDataCenterGroupByHyperlinkReturnValidData()
         {
-            var dataCenterContext = new DataCenterService();
-            var result = await dataCenterContext.GetDataCenterGroup("/v2/datacenters/p2o2/ca1");
+            var client = new Client(userAuthentication);
+            var result = await client.DataCenterService.GetDataCenterGroupByHyperMediaLink("/v2/datacenters/p2o2/ca1");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
