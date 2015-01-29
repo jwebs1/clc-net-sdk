@@ -27,7 +27,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
             var client = new Client(userAuthentication);
-            var serverOperationResponse = await client.ServerService.ResetServer(serverIds);
+            var serverOperationResponse = await client.Servers.ResetServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -42,7 +42,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
                         if (status != null)
                         {
                             var statusId = status.Id;
-                            var queue = await client.QueueService.GetStatus(statusId);
+                            var queue = await client.Queues.GetStatus(statusId);
 
                             Assert.IsTrue(!String.IsNullOrEmpty(queue.Status));
                         }

@@ -24,7 +24,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetServerReturnValidData()
         {
             var client = new Client(userAuthentication);
-            var result = await client.ServerService.GetServer("CA1P2O2DF2TST01");
+            var result = await client.Servers.GetServer("CA1P2O2DF2TST01");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!String.IsNullOrEmpty(result.Id));
@@ -34,7 +34,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetServerByHyperlinkReturnValidData()
         {
             var client = new Client(userAuthentication);
-            var result = await client.ServerService.GetServerByHypermediaLink("/v2/servers/p2o2/ca1p2o2df2tst01");
+            var result = await client.Servers.GetServerByHypermediaLink("/v2/servers/p2o2/ca1p2o2df2tst01");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!String.IsNullOrEmpty(result.Id));
@@ -47,7 +47,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
             var client = new Client(userAuthentication);
-            var serverOperationResponse = await client.ServerService.PauseServer(serverIds);
+            var serverOperationResponse = await client.Servers.PauseServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -67,7 +67,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
             var client = new Client(userAuthentication);
-            var serverOperationResponse = await client.ServerService.PowerOnServer(serverIds);
+            var serverOperationResponse = await client.Servers.PowerOnServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -87,7 +87,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
             var client = new Client(userAuthentication);
-            var serverOperationResponse = await client.ServerService.PowerOffServer(serverIds);
+            var serverOperationResponse = await client.Servers.PowerOffServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -108,7 +108,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
             var client = new Client(userAuthentication);
-            var serverOperationResponse = await client.ServerService.RebootServer(serverIds);
+            var serverOperationResponse = await client.Servers.RebootServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -128,7 +128,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
             var client = new Client(userAuthentication);
-            var serverOperationResponse = await client.ServerService.ShutDownServer(serverIds);
+            var serverOperationResponse = await client.Servers.ShutDownServer(serverIds);
 
             if (serverOperationResponse != null)
             {
@@ -148,7 +148,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
             var client = new Client(userAuthentication);
-            var serverOperationResponse = await client.ServerService.ResetServer(serverIds);
+            var serverOperationResponse = await client.Servers.ResetServer(serverIds);
 
             if (serverOperationResponse != null)
             {

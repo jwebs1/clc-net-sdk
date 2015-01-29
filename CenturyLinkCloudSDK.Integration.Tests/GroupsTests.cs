@@ -22,7 +22,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetGroupReturnValidData()
         {
             var client = new Client(userAuthentication);
-            var result = await client.GroupService.GetGroup("ca1-42311");
+            var result = await client.Groups.GetGroup("ca1-42311");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
@@ -33,7 +33,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetGroupByHyperlinkReturnValidData()
         {
             var client = new Client(userAuthentication);
-            var result = await client.GroupService.GetGroupByHyperLink("/v2/groups/p2o2/ca1-42311");
+            var result = await client.Groups.GetGroupByHyperLink("/v2/groups/p2o2/ca1-42311");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));

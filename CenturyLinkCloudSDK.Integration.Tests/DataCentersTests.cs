@@ -23,7 +23,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetDataCentersReturnValidData()
         {
             var client = new Client(userAuthentication);
-            var result = await client.DataCenterService.GetDataCenters();
+            var result = await client.DataCenters.GetDataCenters();
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.ToList().Count > 0);
@@ -34,7 +34,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
 
             var client = new Client(userAuthentication);
-            var result = await client.DataCenterService.GetDataCenterByHyperMediaLink("/v2/datacenters/p2o2/ca1");
+            var result = await client.DataCenters.GetDataCenterByHyperMediaLink("/v2/datacenters/p2o2/ca1");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Id == "ca1");
@@ -44,7 +44,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetDataCenterReturnValidData()
         {
             var client = new Client(userAuthentication);
-            var result = await client.DataCenterService.GetDataCenter("ca1");
+            var result = await client.DataCenters.GetDataCenter("ca1");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Id == "ca1");
@@ -54,7 +54,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetDataCenterGroupReturnValidData()
         {
             var client = new Client(userAuthentication);
-            var result = await client.DataCenterService.GetDataCenterGroup("ca1");
+            var result = await client.DataCenters.GetDataCenterGroup("ca1");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
@@ -65,7 +65,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetDataCenterGroupByHyperlinkReturnValidData()
         {
             var client = new Client(userAuthentication);
-            var result = await client.DataCenterService.GetDataCenterGroupByHyperMediaLink("/v2/datacenters/p2o2/ca1");
+            var result = await client.DataCenters.GetDataCenterGroupByHyperMediaLink("/v2/datacenters/p2o2/ca1");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
