@@ -20,12 +20,17 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(!String.IsNullOrEmpty(client.UserInfo.AccountAlias));
         }
 
+        [Ignore]
         [TestMethod]
+        [ExpectedException(typeof(CenturyLinkCloudServiceException))]
         public void LoginUserNotAuthenticatedWhenInvalid()
         {
             var client = new Client("mario.mamalisss", "MarioTest!");
 
-            Assert.IsNull(client.UserInfo.BearerToken);
+
+            //Assert.IsFalse(client.UserIsAuthenticated);
+            //Assert.IsNull(client.UserInfo);
+            //Assert.IsNull(client.AuthenticationInfo);
         }
     }
 

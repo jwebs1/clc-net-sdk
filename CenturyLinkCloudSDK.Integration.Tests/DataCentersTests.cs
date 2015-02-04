@@ -71,5 +71,14 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
             Assert.IsTrue(result.Id == "ca1");
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(CenturyLinkCloudServiceException))]
+        public async Task GetDataCenterWithBadTokenThrowException()
+        {
+            var client = new Client(new AuthenticationInfo() { AccountAlias = "P202", BearerToken = "QEWASDADF" });
+            var result = await client.DataCenters.GetDataCenter("ca1");
+
+        }
     }
 }
