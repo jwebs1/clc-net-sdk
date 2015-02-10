@@ -1,4 +1,4 @@
-﻿using CenturyLinkCloudSDK.Services.Runtime;
+﻿using CenturyLinkCloudSDK.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
