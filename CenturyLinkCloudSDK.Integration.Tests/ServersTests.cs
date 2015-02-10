@@ -1,4 +1,4 @@
-﻿using CenturyLinkCloudSDK.ServiceModels.Common;
+﻿using CenturyLinkCloudSDK.ServiceModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
