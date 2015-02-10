@@ -1,9 +1,8 @@
-﻿using CenturyLinkCloudSDK.Services.Runtime;
-using CenturyLinkCloudSDK.Services;
+﻿using CenturyLinkCloudSDK.ServiceModels.Common;
+using CenturyLinkCloudSDK.Services.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using System.Threading.Tasks;
-using CenturyLinkCloudSDK.ServiceModels.Common;
 
 namespace CenturyLinkCloudSDK.Unit.Tests
 {
