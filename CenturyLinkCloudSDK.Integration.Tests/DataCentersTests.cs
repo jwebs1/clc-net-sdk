@@ -9,19 +9,20 @@ namespace CenturyLinkCloudSDK.Unit.Tests
     [TestClass]
     public class DataCentersTests
     {
-        private AuthenticationInfo userAuthentication;
-
-        [TestInitialize]
-        public void Login()
+        private static Client client;
+        private static AuthenticationInfo userAuthentication;
+        
+        [ClassInitialize]
+        public static void Login(TestContext testContext)
         {
-            var client = new Client("mario.mamalis", "MarioTest!");
+            client = new Client("mario.mamalis", "MarioTest!");
             userAuthentication = client.AuthenticationInfo;
         }
 
         [TestMethod]
         public async Task GetDataCentersReturnValidData()
         {
-            var client = new Client(userAuthentication);
+            //var client = new Client(userAuthentication);
             var result = await client.DataCenters.GetDataCenters();
 
             Assert.IsNotNull(result);
@@ -32,7 +33,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetDataCenterByHyperlinkReturnValidData()
         {
 
-            var client = new Client(userAuthentication);
+            //var client = new Client(userAuthentication);
             var result = await client.DataCenters.GetDataCenterByHyperMediaLink("/v2/datacenters/p2o2/ca1");
 
             Assert.IsNotNull(result);
@@ -42,7 +43,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetDataCenterReturnValidData()
         {
-            var client = new Client(userAuthentication);
+            //var client = new Client(userAuthentication);
             var result = await client.DataCenters.GetDataCenter("ca1");
 
             Assert.IsNotNull(result);
@@ -52,7 +53,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetDataCenterGroupReturnValidData()
         {
-            var client = new Client(userAuthentication);
+            //var client = new Client(userAuthentication);
             var result = await client.DataCenters.GetDataCenterGroup("ca1");
 
             Assert.IsNotNull(result);
@@ -63,7 +64,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetDataCenterGroupByHyperlinkReturnValidData()
         {
-            var client = new Client(userAuthentication);
+            //var client = new Client(userAuthentication);
             var result = await client.DataCenters.GetDataCenterGroupByHyperMediaLink("/v2/datacenters/p2o2/ca1");
 
             Assert.IsNotNull(result);

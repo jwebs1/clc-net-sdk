@@ -9,19 +9,19 @@ namespace CenturyLinkCloudSDK.Unit.Tests
     [TestClass]
     public class ServersTests
     {
-        private AuthenticationInfo userAuthentication;
+        private static Client client;
+        private static AuthenticationInfo userAuthentication;
 
-        [TestInitialize]
-        public void Login()
+        [ClassInitialize]
+        public static void Login(TestContext testContext)
         {
-            var client = new Client("mario.mamalis", "MarioTest!");
+            client = new Client("mario.mamalis", "MarioTest!");
             userAuthentication = client.AuthenticationInfo;
         }
 
         [TestMethod]
         public async Task GetServerReturnValidData()
         {
-            var client = new Client(userAuthentication);
             var result = await client.Servers.GetServer("CA1P2O2DF2TST01");
 
             Assert.IsNotNull(result);
@@ -31,7 +31,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetServerByHyperlinkReturnValidData()
         {
-            var client = new Client(userAuthentication);
             var result = await client.Servers.GetServerByHypermediaLink("/v2/servers/p2o2/ca1p2o2df2tst01");
 
             Assert.IsNotNull(result);
@@ -44,7 +43,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var client = new Client(userAuthentication);
             var serverOperationResponse = await client.Servers.PauseServer(serverIds);
 
             if (serverOperationResponse != null)
@@ -64,7 +62,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var client = new Client(userAuthentication);
             var serverOperationResponse = await client.Servers.PowerOnServer(serverIds);
 
             if (serverOperationResponse != null)
@@ -84,7 +81,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var client = new Client(userAuthentication);
             var serverOperationResponse = await client.Servers.PowerOffServer(serverIds);
 
             if (serverOperationResponse != null)
@@ -105,7 +101,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var client = new Client(userAuthentication);
             var serverOperationResponse = await client.Servers.RebootServer(serverIds);
 
             if (serverOperationResponse != null)
@@ -125,7 +120,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var client = new Client(userAuthentication);
             var serverOperationResponse = await client.Servers.ShutDownServer(serverIds);
 
             if (serverOperationResponse != null)
@@ -145,7 +139,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var client = new Client(userAuthentication);
             var serverOperationResponse = await client.Servers.ResetServer(serverIds);
 
             if (serverOperationResponse != null)

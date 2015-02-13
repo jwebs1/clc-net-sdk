@@ -10,12 +10,13 @@ namespace CenturyLinkCloudSDK.Unit.Tests
     [TestClass]
     public class QueueTests
     {
-        private AuthenticationInfo userAuthentication;
+        private static Client client;
+        private static AuthenticationInfo userAuthentication;
 
-        [TestInitialize]
-        public void Login()
+        [ClassInitialize]
+        public static void Login(TestContext testContext)
         {
-            var client = new Client("mario.mamalis", "MarioTest!");
+            client = new Client("mario.mamalis", "MarioTest!");
             userAuthentication = client.AuthenticationInfo;
         }
 
@@ -24,7 +25,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
-            var client = new Client(userAuthentication);
             var serverOperationResponse = await client.Servers.ResetServer(serverIds);
 
             if (serverOperationResponse != null)
