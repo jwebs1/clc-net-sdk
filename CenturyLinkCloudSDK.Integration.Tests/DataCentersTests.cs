@@ -10,13 +10,13 @@ namespace CenturyLinkCloudSDK.Unit.Tests
     public class DataCentersTests
     {
         private static Client client;
-        private static AuthenticationInfo userAuthentication;
+        private static Authentication authentication;
         
         [ClassInitialize]
         public static void Login(TestContext testContext)
         {
             client = new Client("mario.mamalis", "MarioTest!");
-            userAuthentication = client.AuthenticationInfo;
+            authentication = client.Authentication;
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [ExpectedException(typeof(CenturyLinkCloudServiceException))]
         public async Task GetDataCenterWithBadTokenThrowException()
         {
-            var client = new Client(new AuthenticationInfo() { AccountAlias = "P202", BearerToken = "QEWASDADF" });
+            var client = new Client(new Authentication() { AccountAlias = "P202", BearerToken = "QEWASDADF" });
             var result = await client.DataCenters.GetDataCenter("ca1");
 
         }

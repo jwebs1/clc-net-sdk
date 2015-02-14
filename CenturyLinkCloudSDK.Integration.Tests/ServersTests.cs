@@ -10,13 +10,13 @@ namespace CenturyLinkCloudSDK.Unit.Tests
     public class ServersTests
     {
         private static Client client;
-        private static AuthenticationInfo userAuthentication;
+        private static Authentication userAuthentication;
 
         [ClassInitialize]
         public static void Login(TestContext testContext)
         {
             client = new Client("mario.mamalis", "MarioTest!");
-            userAuthentication = client.AuthenticationInfo;
+            userAuthentication = client.Authentication;
         }
 
         [TestMethod]
