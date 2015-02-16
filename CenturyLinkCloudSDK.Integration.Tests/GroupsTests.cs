@@ -42,15 +42,5 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var servers = await result.GetServers().ConfigureAwait(false);
             Assert.IsTrue(servers.Count > 0);
         }
-
-        [TestMethod]
-        public async Task GetGroupByHyperlinkReturnValidData()
-        {
-            var result = await client.Groups.GetGroupByHyperLink("/v2/groups/p2o2/ca1-42311");
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
-            Assert.IsTrue(result.Id == "ca1-42311");
-        }
     }
 }
