@@ -1,5 +1,6 @@
 ﻿using CenturyLinkCloudSDK.ServiceModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Threading.Tasks;
 
 namespace CenturyLinkCloudSDK.Unit.Tests
@@ -28,7 +29,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         }
 
         [TestMethod]
-        public async Task GetGroupServersReturnEmptyListWhenNoServers()
+        [ExpectedException(typeof(InvalidOperationException))]
+        public async Task GetGroupServersThrowExceptionWhenNoServers()
         {
             var result = await client.Groups.GetGroup("ca1-42311").ConfigureAwait(false);
             var servers = await result.GetServers().ConfigureAwait(false);
