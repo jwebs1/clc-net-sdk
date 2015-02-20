@@ -12,9 +12,12 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var client = new Client("mario.mamalis", "MarioTest!");
 
+            Assert.IsNotNull(client.Authentication);
+            Assert.IsTrue(client.UserIsAuthenticated);
+            Assert.IsTrue(!String.IsNullOrEmpty(client.Authentication.BearerToken));
+            Assert.IsTrue(!String.IsNullOrEmpty(client.Authentication.AccountAlias));
             Assert.IsNotNull(client.UserInfo);
-            Assert.IsTrue(!String.IsNullOrEmpty(client.UserInfo.BearerToken));
-            Assert.IsTrue(!String.IsNullOrEmpty(client.UserInfo.AccountAlias));
+            Assert.IsTrue(!String.IsNullOrEmpty(client.UserInfo.UserName));         
         }
 
         [TestMethod]
