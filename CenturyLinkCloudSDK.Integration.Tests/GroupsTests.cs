@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CenturyLinkCloudSDK.Unit.Tests
 {
@@ -34,7 +35,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var result = await client.Groups.GetGroup("ca1-42311").ConfigureAwait(false);
             var servers = await result.GetServers().ConfigureAwait(false);
-            Assert.IsTrue(servers.Count == 0);
+            Assert.IsTrue(servers.ToList().Count == 0);
         }
 
         [TestMethod]
@@ -42,7 +43,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         {
             var result = await client.Groups.GetGroup("ca1-45412").ConfigureAwait(false);
             var servers = await result.GetServers().ConfigureAwait(false);
-            Assert.IsTrue(servers.Count > 0);
+            Assert.IsTrue(servers.ToList().Count > 0);
         }
     }
 }
