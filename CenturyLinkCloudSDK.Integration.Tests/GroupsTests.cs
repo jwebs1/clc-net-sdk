@@ -45,13 +45,12 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var servers = await result.GetServers().ConfigureAwait(false);
             Assert.IsTrue(servers.ToList().Count > 0);
         }
-
-        [Ignore]
+        
         [TestMethod]
         public async Task GetGroupBillingDetailsReturnValidData()
         {
             var result = await client.Groups.GetGroupBillingDetails("ca1-42311").ConfigureAwait(false);
-            //Assert.IsTrue(servers.ToList().Count > 0);
+            Assert.IsTrue(result.Groups.Count > 0);
         }
     }
 }
