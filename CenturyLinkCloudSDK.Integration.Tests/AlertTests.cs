@@ -25,5 +25,18 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             var alertPolicies = await client.Alerts.GetAlertPoliciesForAccount().ConfigureAwait(false);
             Assert.IsTrue(alertPolicies.Items.ToList().Count > 0);
         }
+
+        //[TestMethod]
+        //public async Task GetAlertPoliciesForAccountWithStatisticsReturnValidData()
+        //{
+        //    var alertPolicies = await client.Alerts.GetAlertPoliciesForAccount().ConfigureAwait(false);
+
+        //    foreach(var alertPolicy in alertPolicies.Items.ToList())
+        //    {
+        //        alertPolicy.au
+        //    }
+
+        //    Assert.IsTrue(alertPolicies.Items.ToList().Count > 0);
+        //}
     }
 }
