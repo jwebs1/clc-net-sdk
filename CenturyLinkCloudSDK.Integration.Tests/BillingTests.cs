@@ -30,6 +30,8 @@ namespace CenturyLinkCloudSDK.Integration.Tests
         {
             var result = await client.Billing.GetAccountBillingDetails().ConfigureAwait(false);
             Assert.IsTrue(result.Total.MonthlyEstimate > 0);
+            Assert.IsTrue(result.Total.MonthToDate > 0);
+            Assert.IsTrue(result.Total.CurrentHour > 0);
         }
     }
 }
