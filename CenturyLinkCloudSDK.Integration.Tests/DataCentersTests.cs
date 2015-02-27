@@ -1,6 +1,7 @@
 ﻿using CenturyLinkCloudSDK.Runtime;
 using CenturyLinkCloudSDK.ServiceModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -67,6 +68,43 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             {
                 Assert.IsTrue(!string.IsNullOrEmpty(rootGroup.Name));
             }
+        }
+
+        [TestMethod]
+        public async Task GetDataCentersWithTotalAssets()
+        {
+            var dataCenters = await client.DataCenters.GetAllDataCentersWithTotalAssets().ConfigureAwait(false);
+
+            Assert.IsTrue(dataCenters.Count() > 0);
+            Assert.IsTrue(dataCenters.First().Totals != null);
+        }
+
+        [TestMethod]
+        public async Task GetAllDataCentersWithTotalAssetsComputeAccountTotals()
+        {
+            var dataCenters = await client.DataCenters.GetAllDataCentersWithTotalAssets().ConfigureAwait(false);
+            var accountTotals = new TotalAssets();
+
+            foreach(var dataCenter in dataCenters)
+            {
+                accountTotals.Servers += dataCenter.Totals.Servers;
+                accountTotals.Cpus += dataCenter.Totals.Cpus;
+                accountTotals.MemoryGB += dataCenter.Totals.MemoryGB;              
+                accountTotals.StorageGB += dataCenter.Totals.StorageGB;
+                accountTotals.Queue += dataCenter.Totals.Queue;
+            }
+
+            Assert.IsTrue(accountTotals.Servers > 0);
+        }
+
+        [TestMethod]
+        public async Task GetAccountTotalAssets()
+        {
+            var dataCenters = await client.DataCenters.GetDataCenters().ConfigureAwait(false);
+            var dataCenterIds = dataCenters.Select(d => d.Id).Distinct();
+            var accountTotals = await client.DataCenters.GetAccountTotalAssets(dataCenterIds).ConfigureAwait(false);
+
+            Assert.IsTrue(accountTotals.Servers > 0);
         }
     }
 }
