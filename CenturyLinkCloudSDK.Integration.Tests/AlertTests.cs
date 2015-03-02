@@ -22,8 +22,15 @@ namespace CenturyLinkCloudSDK.Integration.Tests
         [TestMethod]
         public async Task GetAlertPoliciesForAccountReturnValidData()
         {
-            var alertPolicies = await client.Alerts.GetAlertPoliciesForAccount().ConfigureAwait(false);
+            var alertPolicies = await client.Alerts.GetAlertPolicies().ConfigureAwait(false);
             Assert.IsTrue(alertPolicies.Items.ToList().Count > 0);
+        }
+
+        [TestMethod]
+        public async Task GetRecentActivity()
+        {
+            var activity = await client.Alerts.GetRecentActivity().ConfigureAwait(false);
+            Assert.IsTrue(activity.ToList().Count > 0);
         }
 
         //[TestMethod]
