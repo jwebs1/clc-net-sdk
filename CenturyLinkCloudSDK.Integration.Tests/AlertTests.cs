@@ -27,16 +27,10 @@ namespace CenturyLinkCloudSDK.Integration.Tests
         }
 
         //[TestMethod]
-        //public async Task GetAlertPoliciesForAccountWithStatisticsReturnValidData()
+        //public async Task GetServerAlerts()
         //{
-        //    var alertPolicies = await client.Alerts.GetAlertPoliciesForAccount().ConfigureAwait(false);
-
-        //    foreach(var alertPolicy in alertPolicies.Items.ToList())
-        //    {
-        //        alertPolicy.au
-        //    }
-
-        //    Assert.IsTrue(alertPolicies.Items.ToList().Count > 0);
+        //    var alerts = await client.Alerts.GetServerAlerts().ConfigureAwait(false);
+        //    Assert.IsTrue(alerts.ToList().Count > 0);
         //}
     }
 }
