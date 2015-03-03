@@ -1,7 +1,5 @@
-﻿using CenturyLinkCloudSDK.Runtime;
-using CenturyLinkCloudSDK.ServiceModels;
+﻿using CenturyLinkCloudSDK.ServiceModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -93,16 +91,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
                 accountTotals.StorageGB += dataCenter.Totals.StorageGB;
                 accountTotals.Queue += dataCenter.Totals.Queue;
             }
-
-            Assert.IsTrue(accountTotals.Servers > 0);
-        }
-
-        [TestMethod]
-        public async Task GetAccountTotalAssets()
-        {
-            var dataCenters = await client.DataCenters.GetDataCenters().ConfigureAwait(false);
-            var dataCenterIds = dataCenters.Select(d => d.Id).Distinct();
-            var accountTotals = await client.DataCenters.GetAccountTotalAssets(dataCenterIds).ConfigureAwait(false);
 
             Assert.IsTrue(accountTotals.Servers > 0);
         }

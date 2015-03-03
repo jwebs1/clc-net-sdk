@@ -1,8 +1,7 @@
-﻿using System;
+﻿using CenturyLinkCloudSDK.ServiceModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CenturyLinkCloudSDK.ServiceModels;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CenturyLinkCloudSDK.Integration.Tests
 {
@@ -24,13 +23,6 @@ namespace CenturyLinkCloudSDK.Integration.Tests
         {
             var alertPolicies = await client.Alerts.GetAlertPolicies().ConfigureAwait(false);
             Assert.IsTrue(alertPolicies.Items.ToList().Count > 0);
-        }
-
-        [TestMethod]
-        public async Task GetRecentActivity()
-        {
-            var activity = await client.Alerts.GetRecentActivity().ConfigureAwait(false);
-            Assert.IsTrue(activity.ToList().Count > 0);
         }
 
         //[TestMethod]
