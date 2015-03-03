@@ -68,6 +68,15 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
+        //[TestMethod]
+        //public async Task GetDataCentersWithTotalAssets()
+        //{
+        //    var dataCenters = await client.DataCenters.GetAllDataCentersWithTotalAssets().ConfigureAwait(false);
+
+        //    Assert.IsTrue(dataCenters.Count() > 0);
+        //    Assert.IsTrue(dataCenters.First().Totals != null);
+        //}
+
         [TestMethod]
         public async Task GetDataCentersWithTotalAssets()
         {
