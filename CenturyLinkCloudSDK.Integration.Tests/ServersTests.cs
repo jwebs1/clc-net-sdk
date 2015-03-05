@@ -143,5 +143,43 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
+        [TestMethod]
+        public async Task StartMaintenanceReturnOperationIsQueuedIfValidState()
+        {
+            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
+
+            var serverOperationResponse = await client.Servers.StartMaintenance(serverIds);
+
+            if (serverOperationResponse != null)
+            {
+                foreach (var server in serverOperationResponse)
+                {
+                    if (string.IsNullOrEmpty(server.ErrorMessage))
+                    {
+                        Assert.IsTrue(server.IsQueued);
+                    }
+                }
+            }
+        }
+
+        [TestMethod]
+        public async Task StopMaintenanceReturnOperationIsQueuedIfValidState()
+        {
+            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
+
+            var serverOperationResponse = await client.Servers.StopMaintenance(serverIds);
+
+            if (serverOperationResponse != null)
+            {
+                foreach (var server in serverOperationResponse)
+                {
+                    if (string.IsNullOrEmpty(server.ErrorMessage))
+                    {
+                        Assert.IsTrue(server.IsQueued);
+                    }
+                }
+            }
+        }
+
     }
 }
