@@ -33,5 +33,12 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             Assert.IsTrue(result.Total.MonthToDate > 0);
             Assert.IsTrue(result.Total.CurrentHour > 0);
         }
+
+        [TestMethod]
+        public async Task GetServerResourceUnitPricingReturnValidData()
+        {
+            var result = await client.Billing.GetServerResourceUnitPricing("ca1p2o2df2tst01").ConfigureAwait(false);
+            Assert.IsTrue(result.MemoryGB > 0);
+        }
     }
 }
