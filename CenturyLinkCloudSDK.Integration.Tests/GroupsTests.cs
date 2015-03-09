@@ -22,18 +22,18 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetGroupReturnValidData()
         {
-            var result = await client.Groups.GetGroup("ca1-42311").ConfigureAwait(false);
+            var result = await client.Groups.GetGroup("00e3ce61918fe411877f005056882d41").ConfigureAwait(false);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
-            Assert.IsTrue(result.Id == "ca1-42311");
+            Assert.IsTrue(result.Id == "00e3ce61918fe411877f005056882d41");
         }
 
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public async Task GetGroupServersThrowExceptionWhenNoServers()
         {
-            var result = await client.Groups.GetGroup("ca1-42311").ConfigureAwait(false);
+            var result = await client.Groups.GetGroup("00e3ce61918fe411877f005056882d41").ConfigureAwait(false);
             var servers = await result.GetServers().ConfigureAwait(false);
             Assert.IsTrue(servers.ToList().Count == 0);
         }
@@ -41,7 +41,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetGroupServersReturnValidData()
         {
-            var result = await client.Groups.GetGroup("ca1-45412").ConfigureAwait(false);
+            var result = await client.Groups.GetGroup("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
             var servers = await result.GetServers().ConfigureAwait(false);
             Assert.IsTrue(servers.ToList().Count > 0);
         }
