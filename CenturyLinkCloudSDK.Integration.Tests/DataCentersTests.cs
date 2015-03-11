@@ -28,6 +28,18 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         }
 
         [TestMethod]
+        public async Task GetDataCenterWithTotalAssetsAndComputeLimitsReturnValidData()
+        {
+            var result = await client.DataCenters.GetDataCenterWithTotalAssets("ca1");
+            var computeLimits = await result.GetComputeLimits().ConfigureAwait(false);
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Id == "ca1");
+            Assert.IsTrue(result.Totals.MemoryGB > 0);
+            Assert.IsTrue(computeLimits.MemoryGB.Value > 0);
+        }
+
+        [TestMethod]
         public async Task GetDataCenterReturnValidData()
         {
             var result = await client.DataCenters.GetDataCenter("ca1");
@@ -67,15 +79,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
                 Assert.IsTrue(!string.IsNullOrEmpty(rootGroup.Name));
             }
         }
-
-        //[TestMethod]
-        //public async Task GetDataCentersWithTotalAssets()
-        //{
-        //    var dataCenters = await client.DataCenters.GetAllDataCentersWithTotalAssets().ConfigureAwait(false);
-
-        //    Assert.IsTrue(dataCenters.Count() > 0);
-        //    Assert.IsTrue(dataCenters.First().Totals != null);
-        //}
 
         [TestMethod]
         public async Task GetDataCentersWithTotalAssets()
