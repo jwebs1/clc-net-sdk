@@ -19,6 +19,13 @@ namespace CenturyLinkCloudSDK.Integration.Tests
         }
 
         [TestMethod]
+        public async Task GetDataCenterBillingDetailsReturnValidData()
+        {
+            var result = await client.Billing.GetDataCenterBillingDetails("CA1").ConfigureAwait(false);
+            Assert.IsTrue(result.MonthlyEstimate > 0);
+        }
+
+        [TestMethod]
         public async Task GetGroupBillingDetailsReturnValidData()
         {
             var result = await client.Billing.GetGroupBillingDetails("00e3ce61918fe411877f005056882d41").ConfigureAwait(false);
