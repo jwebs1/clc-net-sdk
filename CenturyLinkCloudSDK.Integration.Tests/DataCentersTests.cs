@@ -1,5 +1,7 @@
 ﻿using CenturyLinkCloudSDK.ServiceModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -105,6 +107,18 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
 
             Assert.IsTrue(accountTotals.Servers > 0);
+        }
+
+        [TestMethod]
+        public async Task GetDataCenterOverview()
+        {
+            var dataCenterOverview = await client.DataCenters.GetDataCenterOverview("ca1").ConfigureAwait(false);
+
+            Assert.IsTrue(dataCenterOverview.DataCenter.Id == "ca1");
+            Assert.IsTrue(dataCenterOverview.BillingTotals.MonthlyEstimate > 0);
+            Assert.IsTrue(dataCenterOverview.ComputeLimits.StorageGB.Value > 0);
+            Assert.IsTrue(dataCenterOverview.DataCenter.Totals.StorageGB > 0);
+            Assert.IsTrue(dataCenterOverview.RecentActivity.Count() > 0);
         }
     }
 }

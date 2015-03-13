@@ -30,15 +30,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public async Task GetGroupServersThrowExceptionWhenNoServers()
-        {
-            var result = await client.Groups.GetGroup("00e3ce61918fe411877f005056882d41").ConfigureAwait(false);
-            var servers = await result.GetServers().ConfigureAwait(false);
-            Assert.IsTrue(servers.ToList().Count == 0);
-        }
-
-        [TestMethod]
         public async Task GetGroupServersReturnValidData()
         {
             var result = await client.Groups.GetGroup("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
