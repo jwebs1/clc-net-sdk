@@ -118,6 +118,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(dataCenterOverview.BillingTotals.MonthlyEstimate > 0);
             Assert.IsTrue(dataCenterOverview.ComputeLimits.StorageGB.Value > 0);
             Assert.IsTrue(dataCenterOverview.DataCenter.Totals.StorageGB > 0);
+            Assert.IsTrue(!string.IsNullOrEmpty(dataCenterOverview.DefaultSettings.PrimaryDns.Value));
             Assert.IsTrue(dataCenterOverview.RecentActivity.Count() > 0);
         }
     }
