@@ -20,10 +20,9 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             userAuthentication = client.Authentication;
         }
 
-        [Ignore]
-        [TestMethod]
-        public async Task GetQueueStatusReturnValidData()
-        {
+        //[TestMethod]
+        //public async Task GetQueueStatusReturnValidData()
+        //{
             //var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
 
             //var serverOperationResponse = await client.Servers.ResetServer(serverIds);
@@ -48,6 +47,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             //        }
             //    }
             //}
-        }
+        //}
     }
 }
