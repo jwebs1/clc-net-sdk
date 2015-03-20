@@ -28,7 +28,7 @@ namespace CenturyLinkCloudSDK.Integration.Tests
         [TestMethod]
         public async Task GetGroupBillingDetailsReturnValidData()
         {
-            var result = await client.Billing.GetGroupBillingDetails("00e3ce61918fe411877f005056882d41").ConfigureAwait(false);
+            var result = await client.Billing.GetGroupBillingDetails("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
             Assert.IsTrue(result.Groups.Count > 0);
         }
 
