@@ -36,5 +36,14 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var servers = await result.GetServers().ConfigureAwait(false);
             Assert.IsTrue(servers.ToList().Count > 0);
         }
+
+        [TestMethod]
+        public async Task GetGroupOverviewReturnValidData()
+        {
+            var result = await client.Groups.GetGroupOverview("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
+            
+            Assert.IsTrue(result.BillingTotals.MonthlyEstimate > 0);
+            Assert.IsTrue(result.TotalAssets.MemoryGB > 0);
+        }
     }
 }
