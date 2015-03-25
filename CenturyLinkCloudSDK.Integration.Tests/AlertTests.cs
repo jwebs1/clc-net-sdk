@@ -25,11 +25,11 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             Assert.IsTrue(alertPolicies.Items.ToList().Count > 0);
         }
 
-        //[TestMethod]
-        //public async Task GetServerAlerts()
-        //{
-        //    var alerts = await client.Alerts.GetServerAlerts().ConfigureAwait(false);
-        //    Assert.IsTrue(alerts.ToList().Count > 0);
-        //}
+        [TestMethod]
+        public async Task GetServerAlerts()
+        {
+            var alerts = await client.Alerts.GetServerAlerts().ConfigureAwait(false);
+            Assert.IsTrue(alerts.ToList().Count > 0);
+        }
     }
 }
