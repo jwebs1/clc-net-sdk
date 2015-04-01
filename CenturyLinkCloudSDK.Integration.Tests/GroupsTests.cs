@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace CenturyLinkCloudSDK.Unit.Tests
 {
@@ -44,6 +45,24 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             
             Assert.IsTrue(result.BillingTotals.MonthlyEstimate > 0);
             Assert.IsTrue(result.TotalAssets.MemoryGB > 0);
+        }
+
+        [TestMethod]
+        public async Task GetGroupHierarchyByIdReturnValidData()
+        {
+            var groupHierarchy = await client.Groups.GetGroupHierarchy("00e3ce61918fe411877f005056882d41", true).ConfigureAwait(false);
+
+            Assert.IsTrue(groupHierarchy.Groups.Count > 0);
+        }
+
+        [TestMethod]
+        public async Task GetGroupHierarchyReturnValidData()
+        {
+            //var group = await client.Groups.GetGroup("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
+            var group = await client.Groups.GetGroup("00e3ce61918fe411877f005056882d41").ConfigureAwait(false);          
+            var groupHierarchy = await client.Groups.GetGroupHierarchy(group, true).ConfigureAwait(false);
+
+            Assert.IsTrue(groupHierarchy.Groups.Count > 0);
         }
     }
 }
