@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace CenturyLinkCloudSDK.Unit.Tests
 {
@@ -181,5 +182,34 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
+        [TestMethod]
+        public async Task GetServerCredentialsReturnValidData()
+        {
+            var result = await client.Servers.GetServerCredentials("CA1P2O2DF2TST01");
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(!String.IsNullOrEmpty(result.UserName));
+            Assert.IsTrue(!String.IsNullOrEmpty(result.Password));
+        }
+
+        [TestMethod]
+        public async Task GetServerStatisticsReturnValidData()
+        {
+            var result = await client.Servers.GetServerStatistics("CA1P2O2DF2TST01");
+
+            Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public async Task GetServerRecentActivityReturnValidData()
+        {
+            var referenceIds = new List<string>();
+            referenceIds.Add("CA1P2O2SERVER01");
+
+            var result = await client.Servers.GetRecentActivity(referenceIds);
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.ToList().Count > 0);
+        }
     }
 }
