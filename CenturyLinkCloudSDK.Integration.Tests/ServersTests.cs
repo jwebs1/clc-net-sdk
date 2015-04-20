@@ -218,5 +218,32 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             var result = await client.Servers.GetPublicIpAddress("ca1p2o2df2tst01", "65.39.180.64");
             Assert.IsNotNull(result);           
         }
+
+        [TestMethod]
+        public async Task SetCpuAndMemory()
+        {
+            var operations = new List<PatchOperation>();
+            
+            var patchCpuOperation = new PatchOperation()
+            {
+                Op = "set",
+                Member = "cpu",
+                Value = 1
+            };
+
+            var patchMemoryOperation = new PatchOperation()
+            {
+                Op = "set",
+                Member = "memory",
+                Value = 2
+            };
+
+            operations.Add(patchCpuOperation);
+            operations.Add(patchMemoryOperation);
+
+            var result = await client.Servers.SetCpuAndMemory("ca1p2o2df2tst01", operations);
+
+            Assert.IsNotNull(result);
+        }
     }
 }
