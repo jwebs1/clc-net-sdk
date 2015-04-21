@@ -222,16 +222,16 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task SetCpuAndMemory()
         {
-            var operations = new List<PatchOperation>();
+            var operations = new List<CpuMemoryPatchOperation>();
             
-            var patchCpuOperation = new PatchOperation()
+            var patchCpuOperation = new CpuMemoryPatchOperation()
             {
                 Op = "set",
                 Member = "cpu",
                 Value = 1
             };
 
-            var patchMemoryOperation = new PatchOperation()
+            var patchMemoryOperation = new CpuMemoryPatchOperation()
             {
                 Op = "set",
                 Member = "memory",
