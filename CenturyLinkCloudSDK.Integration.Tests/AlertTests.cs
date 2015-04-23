@@ -31,5 +31,16 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             var alerts = await client.Alerts.GetServerAlerts().ConfigureAwait(false);
             Assert.IsTrue(alerts.ToList().Count > 0);
         }
+
+        [TestMethod]
+        public async Task GetServerAlertsForOneServer()
+        {
+            var server = await client.Servers.GetServer("ca1p2o2server01").ConfigureAwait(false);
+            server.Authentication = authentication;
+            var statistics = await server.GetStatistics().ConfigureAwait(false);
+
+            var alerts = await client.Alerts.GetServerAlerts(server.Id, server.Details.AlertPolicies, statistics).ConfigureAwait(false);
+            Assert.IsTrue(alerts.ToList().Count > 0);
+        }
     }
 }

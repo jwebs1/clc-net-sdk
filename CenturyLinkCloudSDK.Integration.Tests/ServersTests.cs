@@ -23,7 +23,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetServerReturnValidData()
         {
-            var result = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var result = await client.Servers.GetServer("ca1p2o2server01");
 
             Assert.IsNotNull(result);
             Assert.IsTrue(!String.IsNullOrEmpty(result.Id));

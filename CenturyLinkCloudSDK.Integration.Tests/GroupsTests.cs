@@ -64,5 +64,13 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 
             Assert.IsTrue(groupHierarchy.Groups.Count > 0);
         }
+
+        [TestMethod]
+        public async Task GetGroupDefaultSettingsReturnValidData()
+        {
+            var groupSettings = await client.Groups.GetDefaultSettings("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
+
+            Assert.IsTrue(groupSettings.MemoryGB.Value > 0);
+        }
     }
 }
