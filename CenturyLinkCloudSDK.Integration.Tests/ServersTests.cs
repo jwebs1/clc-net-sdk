@@ -29,6 +29,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(!String.IsNullOrEmpty(result.Id));
         }
 
+        [Ignore]
         [TestMethod]
         public async Task PauseServersReturnPauseOperationIsQueuedIfValidState()
         {
@@ -48,6 +49,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
+        [Ignore]
         [TestMethod]
         public async Task PowerOnServersReturnPowerOnOperationIsQueuedIfValidState()
         {
@@ -67,6 +69,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
+        [Ignore]
         [TestMethod]
         public async Task PowerOffServersReturnPowerOffOperationIsQueuedIfValidState()
         {
@@ -86,7 +89,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
-
+        [Ignore]
         [TestMethod]
         public async Task RebootServersReturnRebootOperationIsQueuedIfValidState()
         {
@@ -106,6 +109,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
+        [Ignore]
         [TestMethod]
         public async Task ShutDownServersReturnShutDownOperationIsQueuedIfValidState()
         {
@@ -125,6 +129,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
+        [Ignore]
         [TestMethod]
         public async Task ResetServersReturnResetOperationIsQueuedIfValidState()
         {
@@ -144,6 +149,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
+        [Ignore]
         [TestMethod]
         public async Task StartMaintenanceReturnOperationIsQueuedIfValidState()
         {
@@ -163,6 +169,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
+        [Ignore]
         [TestMethod]
         public async Task StopMaintenanceReturnOperationIsQueuedIfValidState()
         {
