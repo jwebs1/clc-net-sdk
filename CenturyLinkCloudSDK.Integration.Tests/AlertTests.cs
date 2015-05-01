@@ -36,7 +36,7 @@ namespace CenturyLinkCloudSDK.Integration.Tests
         public async Task GetServerAlertsForOneServer()
         {
             var server = await client.Servers.GetServer("ca1p2o2server01").ConfigureAwait(false);
-            server.Authentication = authentication;
+            //server.Authentication = authentication;
             var statistics = await server.GetStatistics().ConfigureAwait(false);
 
             var alerts = await client.Alerts.GetServerAlerts(server.Id, server.Details.AlertPolicies, statistics).ConfigureAwait(false);
