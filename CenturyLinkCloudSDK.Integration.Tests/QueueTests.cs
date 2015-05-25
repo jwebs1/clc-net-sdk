@@ -23,30 +23,32 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         //[TestMethod]
         //public async Task GetQueueStatusReturnValidData()
         //{
-            //var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
+        //    var serverIds = new List<string>() { "CA1P2O2DF2TST01" };
 
-            //var serverOperationResponse = await client.Servers.ResetServer(serverIds);
+        //    var serverOperationResponse = await client.Servers.PowerOnServer(serverIds);
 
-            //if (serverOperationResponse != null)
-            //{
-            //    foreach (var server in serverOperationResponse)
-            //    {
-            //        if (string.IsNullOrEmpty(server.ErrorMessage))
-            //        {
-            //            Assert.IsTrue(server.IsQueued);
+        //    if (serverOperationResponse != null)
+        //    {
+        //        foreach (var server in serverOperationResponse)
+        //        {
+        //            if (string.IsNullOrEmpty(server.ErrorMessage))
+        //            {
+        //                Assert.IsTrue(server.IsQueued);
 
-            //            var status = server.Links.Where(l => l.Rel == "status").FirstOrDefault();
+        //                //var status = server.Links.Where(l => l.Rel == "status").FirstOrDefault();
 
-            //            if (status != null)
-            //            {
-            //                var statusId = status.Id;
-            //                var queue = await client.Queues.GetStatus(statusId);
+        //                //if (status != null)
+        //                //{
 
-            //                Assert.IsTrue(!String.IsNullOrEmpty(queue.Status));
-            //            }
-            //        }
-            //    }
-            //}
+        //                var statusId = server.QueueStatusId;
+        //                var queue = await client.Queues.GetStatus(statusId);
+
+        //                Assert.IsTrue(!String.IsNullOrEmpty(queue.Status));
+
+        //               // }
+        //            }
+        //        }
+        //    }
         //}
     }
 }
