@@ -16,8 +16,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(client.UserIsAuthenticated);
             Assert.IsTrue(!String.IsNullOrEmpty(client.Authentication.BearerToken));
             Assert.IsTrue(!String.IsNullOrEmpty(client.Authentication.AccountAlias));
-            Assert.IsNotNull(client.UserInfo);
-            Assert.IsTrue(!String.IsNullOrEmpty(client.UserInfo.UserName));         
         }
 
         [TestMethod]
