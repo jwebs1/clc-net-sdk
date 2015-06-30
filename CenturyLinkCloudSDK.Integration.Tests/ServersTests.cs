@@ -9,7 +9,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 {
     [TestClass]
     public class ServersTests
-    {
+    {        
         private static Client client;
         private static Authentication userAuthentication;
 
@@ -29,6 +29,27 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(!String.IsNullOrEmpty(result.Id));
         }
 
+        [TestMethod]
+        public async Task GetServerCredentialsReturnValidData()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var result = await server.GetCredentials();
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(!String.IsNullOrEmpty(result.UserName));
+            Assert.IsTrue(!String.IsNullOrEmpty(result.Password));
+        }
+
+        [TestMethod]
+        public async Task GetServerStatisticsReturnValidData()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var result = await server.GetStatistics();
+
+            Assert.IsNotNull(result);
+        }
+
+        /*
         [Ignore]
         [TestMethod]
         public async Task PauseServersReturnPauseOperationIsQueuedIfValidState()
@@ -187,37 +208,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
                     }
                 }
             }
-        }
+        }        
 
-        [TestMethod]
-        public async Task GetServerCredentialsReturnValidData()
-        {
-            var result = await client.Servers.GetServerCredentials("CA1P2O2DF2TST01");
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(!String.IsNullOrEmpty(result.UserName));
-            Assert.IsTrue(!String.IsNullOrEmpty(result.Password));
-        }
-
-        [TestMethod]
-        public async Task GetServerStatisticsReturnValidData()
-        {
-            var result = await client.Servers.GetServerStatistics("CA1P2O2DF2TST01");
-
-            Assert.IsNotNull(result);
-        }
-
-        [TestMethod]
-        public async Task GetServerRecentActivityReturnValidData()
-        {
-            var referenceIds = new List<string>();
-            referenceIds.Add("CA1P2O2SERVER01");
-
-            var result = await client.Servers.GetRecentActivity(referenceIds);
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.ToList().Count > 0);
-        }
 
         [TestMethod]
         public async Task GetPublicIpAddress()
@@ -252,5 +244,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 
             Assert.IsNotNull(result);
         }
+         */
     }
 }

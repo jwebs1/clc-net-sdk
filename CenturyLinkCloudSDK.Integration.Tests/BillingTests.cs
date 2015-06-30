@@ -8,6 +8,7 @@ namespace CenturyLinkCloudSDK.Integration.Tests
     [TestClass]
     public class BillingTests
     {
+        /*
         private static Client client;
         private static Authentication authentication;
 
@@ -47,5 +48,6 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             var result = await client.Billing.GetServerResourceUnitPricing("ca1p2o2df2tst01").ConfigureAwait(false);
             Assert.IsTrue(result.MemoryGB > 0);
         }
+         */
     }
 }

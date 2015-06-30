@@ -9,7 +9,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 {
     [TestClass]
     public class QueueTests
-    {
+    {        
         private static Client client;
         private static Authentication userAuthentication;
 
@@ -49,6 +49,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         //            }
         //        }
         //    }
-        //}
+        //}         
     }
 }

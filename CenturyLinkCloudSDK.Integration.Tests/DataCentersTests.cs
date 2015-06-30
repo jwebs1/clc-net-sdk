@@ -9,7 +9,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 {
     [TestClass]
     public class DataCentersTests
-    {
+    {        
         private static Client client;
         private static Authentication authentication;
         
@@ -23,12 +23,58 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetDataCentersReturnValidData()
         {
-            var result = await client.DataCenters.GetDataCenters();
+            var result = await client.DataCenters.GetDataCenters(includeTotalAssets: false);
 
             Assert.IsNotNull(result);
+            Assert.IsTrue(result.All(d => !d.HasTotalAssets));
+            Assert.IsTrue(result.ToList().Count > 0);        
+        }
+
+        [TestMethod]
+        public async Task GetDataCentersIncludesAssets()
+        {
+            var result = await client.DataCenters.GetDataCenters(includeTotalAssets: true);
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.All(d => d.HasTotalAssets));
+            Assert.IsTrue(result.Any(d => d.Totals.Servers > 0));
             Assert.IsTrue(result.ToList().Count > 0);
         }
 
+        [TestMethod]
+        public async Task GetDataCenterReturnValidData()
+        {
+            var result = await client.DataCenters.GetDataCenter("ca1", includeTotalAssets: false);
+
+            Assert.IsNotNull(result);
+            Assert.IsFalse(result.HasTotalAssets);
+            Assert.IsTrue(result.Id == "ca1");
+        }
+
+        [TestMethod]
+        public async Task GetDataCenterIncludesAssets()
+        {
+            var result = await client.DataCenters.GetDataCenter("ca1", includeTotalAssets: true);
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.HasTotalAssets);
+            Assert.IsTrue(result.Totals.Servers > 0);
+            Assert.IsTrue(result.Id == "ca1");
+        }
+
+
+        [TestMethod]
+        public async Task GetDataCenterRootGroupReturnValidData()
+        {
+            var dc = await client.DataCenters.GetDataCenter("ca1", includeTotalAssets: false);
+
+            var rootGroup = await dc.GetRootGroup().ConfigureAwait(false);
+
+            Assert.IsNotNull(rootGroup);
+            Assert.IsTrue(!string.IsNullOrEmpty(rootGroup.Name));            
+        }
+
+        /*
         [TestMethod]
         public async Task GetDataCenterWithTotalAssetsAndComputeLimitsReturnValidData()
         {
@@ -39,16 +85,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(result.Id == "ca1");
             Assert.IsTrue(result.Totals.MemoryGB > 0);
             Assert.IsTrue(computeLimits.MemoryGB.Value > 0);
-        }
-
-        [TestMethod]
-        public async Task GetDataCenterReturnValidData()
-        {
-            var result = await client.DataCenters.GetDataCenter("ca1");
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Id == "ca1");
-        }
+        }        
 
         [TestMethod]
         public async Task GetDataCenterGroupReturnValidData()
@@ -69,18 +106,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 
         }
 
-        [TestMethod]
-        public async Task GetDataCenterRootGroupReturnValidData()
-        {
-            var dataCenterGroup = await client.DataCenters.GetDataCenterGroup("ca1");
-
-            var rootGroup = await dataCenterGroup.GetRootHardwareGroup().ConfigureAwait(false);
-
-            if (rootGroup != null)
-            {
-                Assert.IsTrue(!string.IsNullOrEmpty(rootGroup.Name));
-            }
-        }
 
         [TestMethod]
         public async Task GetDataCentersWithTotalAssets()
@@ -112,7 +137,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         [TestMethod]
         public async Task GetDataCenterOverview()
         {
-            var dataCenterOverview = await client.DataCenters.GetDataCenterOverview("ca1").ConfigureAwait(false);
+            var dataCenterOverview = await client.DataCenters.GetDataCenterOverview("ca2").ConfigureAwait(false);
 
             Assert.IsTrue(dataCenterOverview.DataCenter.Id == "ca1");
             Assert.IsTrue(dataCenterOverview.BillingTotals.MonthlyEstimate > 0);
@@ -131,5 +156,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(result.DataCenterEnabled);
             Assert.IsTrue(result.Templates.Count() > 0);
         }
+         */
     }
 }

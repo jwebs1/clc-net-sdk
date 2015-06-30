@@ -8,6 +8,7 @@ namespace CenturyLinkCloudSDK.Integration.Tests
     [TestClass]
     public class AlertTests
     {
+        /*
         private static Client client;
         private static Authentication authentication;
 
@@ -42,5 +43,6 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             var alerts = await client.Alerts.GetServerAlerts(server.Id, server.Details.AlertPolicies, statistics).ConfigureAwait(false);
             Assert.IsTrue(alerts.ToList().Count > 0);
         }
+         */
     }
 }
