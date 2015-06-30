@@ -48,169 +48,112 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 
             Assert.IsNotNull(result);
         }
+        
+        [Ignore]
+        [TestMethod]
+        public async Task PauseServersReturnOperationIsQueuedIfValidState()
+        {            
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var response = await server.Pause();
+
+            if (string.IsNullOrEmpty(response.ErrorMessage))
+            {
+                Assert.IsTrue(response.IsQueued);
+            }
+        }
+
+        [Ignore]
+        [TestMethod]
+        public async Task PowerOnServersReturnOperationIsQueuedIfValidState()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var response = await server.PowerOn();
+
+            if (string.IsNullOrEmpty(response.ErrorMessage))
+            {
+                Assert.IsTrue(response.IsQueued);
+            }
+        }
+
+        [Ignore]
+        [TestMethod]
+        public async Task PowerOffServersReturnOperationIsQueuedIfValidState()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var response = await server.PowerOff();
+
+            if (string.IsNullOrEmpty(response.ErrorMessage))
+            {
+                Assert.IsTrue(response.IsQueued);
+            }
+        }
+
+        [Ignore]
+        [TestMethod]
+        public async Task RebootServersReturnOperationIsQueuedIfValidState()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var response = await server.Reboot();
+
+            if (string.IsNullOrEmpty(response.ErrorMessage))
+            {
+                Assert.IsTrue(response.IsQueued);
+            }
+        }
+
+        [Ignore]
+        [TestMethod]
+        public async Task ResetServersReturnOperationIsQueuedIfValidState()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var response = await server.Reset();
+
+            if (string.IsNullOrEmpty(response.ErrorMessage))
+            {
+                Assert.IsTrue(response.IsQueued);
+            }
+        }
+
+        [Ignore]
+        [TestMethod]
+        public async Task ShutDownServersReturnOperationIsQueuedIfValidState()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var response = await server.ShutDown();
+
+            if (string.IsNullOrEmpty(response.ErrorMessage))
+            {
+                Assert.IsTrue(response.IsQueued);
+            }
+        }
+
+        [Ignore]
+        [TestMethod]
+        public async Task StartMaintenanceServersReturnOperationIsQueuedIfValidState()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var response = await server.StartMaintenance();
+
+            if (string.IsNullOrEmpty(response.ErrorMessage))
+            {
+                Assert.IsTrue(response.IsQueued);
+            }
+        }
+
+        [Ignore]
+        [TestMethod]
+        public async Task StopMaintenaceServersReturnOperationIsQueuedIfValidState()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01");
+            var response = await server.StopMaintenance();
+
+            if (string.IsNullOrEmpty(response.ErrorMessage))
+            {
+                Assert.IsTrue(response.IsQueued);
+            }
+        }
 
         /*
-        [Ignore]
-        [TestMethod]
-        public async Task PauseServersReturnPauseOperationIsQueuedIfValidState()
-        {
-            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
-
-            var serverOperationResponse = await client.Servers.PauseServer(serverIds);
-
-            if (serverOperationResponse != null)
-            {
-                foreach (var server in serverOperationResponse)
-                {
-                    if (string.IsNullOrEmpty(server.ErrorMessage))
-                    {
-                        Assert.IsTrue(server.IsQueued);
-                    }
-                }
-            }
-        }
-
-        [Ignore]
-        [TestMethod]
-        public async Task PowerOnServersReturnPowerOnOperationIsQueuedIfValidState()
-        {
-            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
-
-            var serverOperationResponse = await client.Servers.PowerOnServer(serverIds);
-
-            if (serverOperationResponse != null)
-            {
-                foreach (var server in serverOperationResponse)
-                {
-                    if(string.IsNullOrEmpty(server.ErrorMessage))
-                    {
-                        Assert.IsTrue(server.IsQueued);
-                    }
-                }
-            }
-        }
-
-        [Ignore]
-        [TestMethod]
-        public async Task PowerOffServersReturnPowerOffOperationIsQueuedIfValidState()
-        {
-            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
-
-            var serverOperationResponse = await client.Servers.PowerOffServer(serverIds);
-
-            if (serverOperationResponse != null)
-            {
-                foreach (var server in serverOperationResponse)
-                {
-                    if (string.IsNullOrEmpty(server.ErrorMessage))
-                    {
-                        Assert.IsTrue(server.IsQueued);
-                    }
-                }
-            }
-        }
-
-        [Ignore]
-        [TestMethod]
-        public async Task RebootServersReturnRebootOperationIsQueuedIfValidState()
-        {
-            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
-
-            var serverOperationResponse = await client.Servers.RebootServer(serverIds);
-
-            if (serverOperationResponse != null)
-            {
-                foreach (var server in serverOperationResponse)
-                {
-                    if (string.IsNullOrEmpty(server.ErrorMessage))
-                    {
-                        Assert.IsTrue(server.IsQueued);
-                    }
-                }
-            }
-        }
-
-        [Ignore]
-        [TestMethod]
-        public async Task ShutDownServersReturnShutDownOperationIsQueuedIfValidState()
-        {
-            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
-
-            var serverOperationResponse = await client.Servers.ShutDownServer(serverIds);
-
-            if (serverOperationResponse != null)
-            {
-                foreach (var server in serverOperationResponse)
-                {
-                    if (string.IsNullOrEmpty(server.ErrorMessage))
-                    {
-                        Assert.IsTrue(server.IsQueued);
-                    }
-                }
-            }
-        }
-
-        [Ignore]
-        [TestMethod]
-        public async Task ResetServersReturnResetOperationIsQueuedIfValidState()
-        {
-            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
-
-            var serverOperationResponse = await client.Servers.ResetServer(serverIds);
-
-            if (serverOperationResponse != null)
-            {
-                foreach (var server in serverOperationResponse)
-                {
-                    if (string.IsNullOrEmpty(server.ErrorMessage))
-                    {
-                        Assert.IsTrue(server.IsQueued);
-                    }
-                }
-            }
-        }
-
-        [Ignore]
-        [TestMethod]
-        public async Task StartMaintenanceReturnOperationIsQueuedIfValidState()
-        {
-            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
-
-            var serverOperationResponse = await client.Servers.StartMaintenance(serverIds);
-
-            if (serverOperationResponse != null)
-            {
-                foreach (var server in serverOperationResponse)
-                {
-                    if (string.IsNullOrEmpty(server.ErrorMessage))
-                    {
-                        Assert.IsTrue(server.IsQueued);
-                    }
-                }
-            }
-        }
-
-        [Ignore]
-        [TestMethod]
-        public async Task StopMaintenanceReturnOperationIsQueuedIfValidState()
-        {
-            var serverIds = new List<string>() { "CA1P2O2DF2TST01", "CA1P2O2TEST01" };
-
-            var serverOperationResponse = await client.Servers.StopMaintenance(serverIds);
-
-            if (serverOperationResponse != null)
-            {
-                foreach (var server in serverOperationResponse)
-                {
-                    if (string.IsNullOrEmpty(server.ErrorMessage))
-                    {
-                        Assert.IsTrue(server.IsQueued);
-                    }
-                }
-            }
-        }        
-
-
         [TestMethod]
         public async Task GetPublicIpAddress()
         {
