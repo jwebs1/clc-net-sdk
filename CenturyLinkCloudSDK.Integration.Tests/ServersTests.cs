@@ -153,19 +153,11 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
         }
 
-        /*
-        [TestMethod]
-        public async Task GetPublicIpAddress()
-        {
-            var result = await client.Servers.GetPublicIpAddress("ca1p2o2df2tst01", "65.39.180.64");
-            Assert.IsNotNull(result);           
-        }
-
         [TestMethod]
         public async Task SetCpuAndMemory()
         {
             var operations = new List<CpuMemoryPatchOperation>();
-            
+
             var patchCpuOperation = new CpuMemoryPatchOperation()
             {
                 Op = "set",
@@ -183,10 +175,21 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             operations.Add(patchCpuOperation);
             operations.Add(patchMemoryOperation);
 
-            var result = await client.Servers.SetCpuAndMemory("ca1p2o2df2tst01", operations);
+            var server = await client.Servers.GetServer("ca1p2o2df2tst01");
+            var result = await server.SetCpuAndMemory(operations);
 
             Assert.IsNotNull(result);
         }
+
+        /*
+        [TestMethod]
+        public async Task GetPublicIpAddress()
+        {
+            var result = await client.Servers.GetPublicIpAddress("ca1p2o2df2tst01", "65.39.180.64");
+            Assert.IsNotNull(result);           
+        }
+
+        
          */
     }
 }
