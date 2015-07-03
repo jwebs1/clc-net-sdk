@@ -30,7 +30,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(result.Id == "00e3ce61918fe411877f005056882d41");
         }
 
-        /*
         [TestMethod]
         public async Task GetGroupServersReturnValidData()
         {
@@ -39,6 +38,8 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(servers.ToList().Count > 0);
         }
 
+        /*
+       
         [TestMethod]
         public async Task GetGroupOverviewReturnValidData()
         {

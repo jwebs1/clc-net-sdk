@@ -52,6 +52,14 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(CenturyLinkCloudServiceException))]
+        public async Task GetDataCenterWithBadTokenThrowException()
+        {
+            var client = new Client(new Authentication() { AccountAlias = "P202", BearerToken = "QEWASDADF" });
+            var result = await client.DataCenters.GetDataCenter("ca1", includeTotalAssets: false);
+        }
+
+        [TestMethod]
         public async Task GetDataCenterIncludesAssets()
         {
             var result = await client.DataCenters.GetDataCenter("ca1", includeTotalAssets: true);
@@ -72,6 +80,20 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 
             Assert.IsNotNull(rootGroup);
             Assert.IsTrue(!string.IsNullOrEmpty(rootGroup.Name));            
+        }
+
+        [TestMethod]
+        public async Task GetDataCenterOverview()
+        {
+            var dataCenterOverview = await client.DataCenters.GetDataCenterOverview("ca1").ConfigureAwait(false);
+
+            Assert.IsTrue(dataCenterOverview.DataCenter.Id == "ca1");
+            Assert.IsTrue(dataCenterOverview.BillingTotals.MonthlyEstimate > 0);
+            Assert.IsTrue(dataCenterOverview.ComputeLimits.StorageGB.Value > 0);
+            Assert.IsTrue(dataCenterOverview.DataCenter.Totals.StorageGB > 0);
+            Assert.IsTrue(!string.IsNullOrEmpty(dataCenterOverview.DefaultSettings.PrimaryDns.Value));
+            Assert.IsTrue(dataCenterOverview.RecentActivity.Count() > 0);
+            Assert.IsTrue(dataCenterOverview.NetworkLimits.Networks.Value > 0);
         }
 
         /*
@@ -95,17 +117,7 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsNotNull(result);
             Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
             Assert.IsTrue(result.Id == "ca1");
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(CenturyLinkCloudServiceException))]
-        public async Task GetDataCenterWithBadTokenThrowException()
-        {
-            var client = new Client(new Authentication() { AccountAlias = "P202", BearerToken = "QEWASDADF" });
-            var result = await client.DataCenters.GetDataCenter("ca1");
-
-        }
-
+        }        
 
         [TestMethod]
         public async Task GetDataCentersWithTotalAssets()
@@ -132,20 +144,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             }
 
             Assert.IsTrue(accountTotals.Servers > 0);
-        }
-
-        [TestMethod]
-        public async Task GetDataCenterOverview()
-        {
-            var dataCenterOverview = await client.DataCenters.GetDataCenterOverview("ca2").ConfigureAwait(false);
-
-            Assert.IsTrue(dataCenterOverview.DataCenter.Id == "ca1");
-            Assert.IsTrue(dataCenterOverview.BillingTotals.MonthlyEstimate > 0);
-            Assert.IsTrue(dataCenterOverview.ComputeLimits.StorageGB.Value > 0);
-            Assert.IsTrue(dataCenterOverview.DataCenter.Totals.StorageGB > 0);
-            Assert.IsTrue(!string.IsNullOrEmpty(dataCenterOverview.DefaultSettings.PrimaryDns.Value));
-            Assert.IsTrue(dataCenterOverview.RecentActivity.Count() > 0);
-            Assert.IsTrue(dataCenterOverview.NetworkLimits.Networks.Value > 0);
         }
 
         [TestMethod]

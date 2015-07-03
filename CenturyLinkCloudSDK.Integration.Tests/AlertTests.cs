@@ -7,8 +7,7 @@ namespace CenturyLinkCloudSDK.Integration.Tests
 {
     [TestClass]
     public class AlertTests
-    {
-        /*
+    {        
         private static Client client;
         private static Authentication authentication;
 
@@ -18,7 +17,7 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             client = new Client("mario.mamalis", "MarioTest!");
             authentication = client.Authentication;
         }
-
+        
         [TestMethod]
         public async Task GetAlertPoliciesForAccountReturnValidData()
         {
@@ -33,6 +32,7 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             Assert.IsTrue(alerts.ToList().Count > 0);
         }
 
+        /*
         [TestMethod]
         public async Task GetServerAlertsForOneServer()
         {

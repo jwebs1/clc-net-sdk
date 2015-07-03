@@ -30,6 +30,15 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         }
 
         [TestMethod]
+        public async Task GetServersReturnValidData()
+        {
+            var result = await client.Servers.GetServers(new [] { "ca1p2o2server01", "CA1P2O2DF2TST01" });
+
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count() == 2);
+        }
+
+        [TestMethod]
         public async Task GetServerCredentialsReturnValidData()
         {
             var server = await client.Servers.GetServer("CA1P2O2DF2TST01");

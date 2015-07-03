@@ -7,8 +7,7 @@ namespace CenturyLinkCloudSDK.Integration.Tests
 {
     [TestClass]
     public class BillingTests
-    {
-        /*
+    {        
         private static Client client;
         private static Authentication authentication;
 
@@ -20,27 +19,31 @@ namespace CenturyLinkCloudSDK.Integration.Tests
         }
 
         [TestMethod]
+        public async Task GetAccountBillingDetailsReturnValidData()
+        {
+            var result = await client.Billing.GetBillingDetails().ConfigureAwait(false);
+            Assert.IsTrue(result.Total.MonthlyEstimate > 0);
+            Assert.IsTrue(result.Total.MonthToDate > 0);
+            Assert.IsTrue(result.Total.CurrentHour > 0);
+        }
+
+        [TestMethod]
         public async Task GetDataCenterBillingDetailsReturnValidData()
         {
-            var result = await client.Billing.GetDataCenterBillingDetails("CA1").ConfigureAwait(false);
+            var dataCenter = await client.DataCenters.GetDataCenter("CA1", includeTotalAssets: false).ConfigureAwait(false);
+            var result = await client.Billing.GetBillingDetailsFor(dataCenter).ConfigureAwait(false);
             Assert.IsTrue(result.MonthlyEstimate > 0);
         }
 
         [TestMethod]
         public async Task GetGroupBillingDetailsReturnValidData()
         {
-            var result = await client.Billing.GetGroupBillingDetails("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
-            Assert.IsTrue(result.Groups.Count > 0);
+            var group = await client.Groups.GetGroup("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
+            var result = await client.Billing.GetBillingDetailsFor(group).ConfigureAwait(false);
+            Assert.IsTrue(result.MonthlyEstimate > 0);
         }
 
-        [TestMethod]
-        public async Task GetAccountBillingDetailsReturnValidData()
-        {
-            var result = await client.Billing.GetAccountBillingDetails().ConfigureAwait(false);
-            Assert.IsTrue(result.Total.MonthlyEstimate > 0);
-            Assert.IsTrue(result.Total.MonthToDate > 0);
-            Assert.IsTrue(result.Total.CurrentHour > 0);
-        }
+        /*        
 
         [TestMethod]
         public async Task GetServerResourceUnitPricingReturnValidData()
