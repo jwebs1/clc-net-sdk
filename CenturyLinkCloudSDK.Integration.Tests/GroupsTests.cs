@@ -34,8 +34,17 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         public async Task GetGroupServersReturnValidData()
         {
             var result = await client.Groups.GetGroup("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
-            var servers = await result.GetServers().ConfigureAwait(false);
+            var servers = await result.GetServers(includeSubGroups: false).ConfigureAwait(false);
             Assert.IsTrue(servers.ToList().Count > 0);
+        }
+
+        [TestMethod]
+        public async Task GetGroupDefaultSettingsReturnValidData()
+        {
+            var group = await client.Groups.GetGroup("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
+            var groupSettings = await group.GetDefaultSettings().ConfigureAwait(false);
+
+            Assert.IsTrue(groupSettings.MemoryGB.Value > 0);
         }
 
         /*
@@ -67,13 +76,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
             Assert.IsTrue(groupHierarchy.Groups.Count > 0);
         }
 
-        [TestMethod]
-        public async Task GetGroupDefaultSettingsReturnValidData()
-        {
-            var groupSettings = await client.Groups.GetDefaultSettings("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
-
-            Assert.IsTrue(groupSettings.MemoryGB.Value > 0);
-        }
          */
     }
 }
