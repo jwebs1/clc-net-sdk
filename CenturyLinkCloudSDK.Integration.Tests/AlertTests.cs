@@ -32,17 +32,12 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             Assert.IsTrue(alerts.ToList().Count > 0);
         }
 
-        /*
         [TestMethod]
         public async Task GetServerAlertsForOneServer()
         {
             var server = await client.Servers.GetServer("ca1p2o2df2tst01").ConfigureAwait(false);
-            //server.Authentication = authentication;
-            var statistics = await server.GetStatistics().ConfigureAwait(false);
-
-            var alerts = await client.Alerts.GetServerAlerts(server.Id, server.Details.AlertPolicies, statistics).ConfigureAwait(false);
+            var alerts = await client.Alerts.GetServerAlerts(server).ConfigureAwait(false);
             Assert.IsTrue(alerts.ToList().Count > 0);
-        }
-         */
+        }        
     }
 }
