@@ -189,16 +189,5 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 
             Assert.IsNotNull(result);
         }
-
-        /*
-        [TestMethod]
-        public async Task GetPublicIpAddress()
-        {
-            var result = await client.Servers.GetPublicIpAddress("ca1p2o2df2tst01", "65.39.180.64");
-            Assert.IsNotNull(result);           
-        }
-
-        
-         */
     }
 }

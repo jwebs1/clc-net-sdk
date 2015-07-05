@@ -50,15 +50,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
         /*
        
         [TestMethod]
-        public async Task GetGroupOverviewReturnValidData()
-        {
-            var result = await client.Groups.GetGroupOverview("a726bd9f7d9be411877f005056882d41").ConfigureAwait(false);
-            
-            Assert.IsTrue(result.BillingTotals.MonthlyEstimate > 0);
-            Assert.IsTrue(result.TotalAssets.MemoryGB > 0);
-        }
-
-        [TestMethod]
         public async Task GetGroupHierarchyByIdReturnValidData()
         {
             var groupHierarchy = await client.Groups.GetGroupHierarchy("00e3ce61918fe411877f005056882d41", true).ConfigureAwait(false);

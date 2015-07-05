@@ -98,55 +98,6 @@ namespace CenturyLinkCloudSDK.Unit.Tests
 
         /*
         [TestMethod]
-        public async Task GetDataCenterWithTotalAssetsAndComputeLimitsReturnValidData()
-        {
-            var result = await client.DataCenters.GetDataCenterWithTotalAssets("ca1");
-            var computeLimits = await result.GetComputeLimits().ConfigureAwait(false);
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Id == "ca1");
-            Assert.IsTrue(result.Totals.MemoryGB > 0);
-            Assert.IsTrue(computeLimits.MemoryGB.Value > 0);
-        }        
-
-        [TestMethod]
-        public async Task GetDataCenterGroupReturnValidData()
-        {
-            var result = await client.DataCenters.GetDataCenterGroup("ca1");
-
-            Assert.IsNotNull(result);
-            Assert.IsTrue(!string.IsNullOrEmpty(result.Id));
-            Assert.IsTrue(result.Id == "ca1");
-        }        
-
-        [TestMethod]
-        public async Task GetDataCentersWithTotalAssets()
-        {
-            var dataCenters = await client.DataCenters.GetAllDataCentersWithTotalAssets().ConfigureAwait(false);
-
-            Assert.IsTrue(dataCenters.Count() > 0);
-            Assert.IsTrue(dataCenters.First().Totals != null);
-        }
-
-        [TestMethod]
-        public async Task GetAllDataCentersWithTotalAssetsComputeAccountTotals()
-        {
-            var dataCenters = await client.DataCenters.GetAllDataCentersWithTotalAssets().ConfigureAwait(false);
-            var accountTotals = new TotalAssets();
-
-            foreach(var dataCenter in dataCenters)
-            {
-                accountTotals.Servers += dataCenter.Totals.Servers;
-                accountTotals.Cpus += dataCenter.Totals.Cpus;
-                accountTotals.MemoryGB += dataCenter.Totals.MemoryGB;              
-                accountTotals.StorageGB += dataCenter.Totals.StorageGB;
-                accountTotals.Queue += dataCenter.Totals.Queue;
-            }
-
-            Assert.IsTrue(accountTotals.Servers > 0);
-        }
-
-        [TestMethod]
         public async Task GetDataCenterDeploymentCapabilities()
         {
             var result = await client.DataCenters.GetDeploymentCapabilities("ca1").ConfigureAwait(false);
