@@ -43,8 +43,16 @@ namespace CenturyLinkCloudSDK.Integration.Tests
             Assert.IsTrue(result.MonthlyEstimate > 0);
         }
 
-        /*        
+        [TestMethod]
+        public async Task GetServerBillingDetailsReturnValidData()
+        {
+            var server = await client.Servers.GetServer("CA1P2O2DF2TST01").ConfigureAwait(false);
+            var result = await client.Billing.GetBillingDetailsFor(server).ConfigureAwait(false);
+            Assert.IsTrue(result.MonthlyEstimate > 0);
+        }
 
+        /*        
+        
         [TestMethod]
         public async Task GetServerResourceUnitPricingReturnValidData()
         {
